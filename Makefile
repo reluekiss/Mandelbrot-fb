@@ -2,8 +2,6 @@ CC = gcc
 CFLAGS = -static -O3 -Wall -Wextra
 LDFLAGS = -lm -lpthread -ffunction-sections -fdata-sections -flto
 
-.PHONY: all clean build/mandelbrot
-
 all: clean build build/mandelbrot run
 
 run:
