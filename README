@@ -1,1 +1,2 @@
 Mandelbrot rendered in framebuffer.
+Arbitrary version is very slow I wonder if a custom implementation would be faster?
