@@ -39,7 +39,7 @@ unsigned int *draw_buffer = NULL;
 
 static const double LOG2 = 0.693147180559945;
 
-unsigned int color_from_iteration(int iter, int max_iter, double smooth_value) {
+static inline unsigned int color_from_iteration(int iter, int max_iter, double smooth_value) {
     if (iter == max_iter) return 0;
     
     double t = (iter + 1 - smooth_value) / max_iter;
@@ -52,12 +52,12 @@ unsigned int color_from_iteration(int iter, int max_iter, double smooth_value) {
     return (r << 16) | (g << 8) | b;
 }
 
-double calculate_smooth_value(double zr, double zi) {
+static inline double calculate_smooth_value(double zr, double zi) {
     double mag_squared = zr*zr + zi*zi;
     return 1.0 - log(log(mag_squared) / 2.0) / LOG2;
 }
 
-void calculate_reference_orbit(double center_re, double center_im, int max_iter) {
+static inline void calculate_reference_orbit(double center_re, double center_im, int max_iter) {
     printf("Calculating reference orbit for (%g, %g)...\n", center_re, center_im);
     
     if (!ref_real || !ref_imag || !ref_dz_real || !ref_dz_imag) {
@@ -112,7 +112,7 @@ typedef struct {
     unsigned int *thread_buffer;
 } ThreadData;
 
-void* render_slice(void* arg) {
+static inline void* render_slice(void* arg) {
     ThreadData* data = (ThreadData*)arg;
     
     int width = data->vinfo->xres;
@@ -199,7 +199,7 @@ void* render_slice(void* arg) {
     return NULL;
 }
 
-void combine_thread_buffers(ThreadData* thread_data, int thread_count) {
+static inline void combine_thread_buffers(ThreadData* thread_data, int thread_count) {
     struct fb_var_screeninfo *vinfo = thread_data[0].vinfo;
     int width = vinfo->xres;
     
@@ -218,7 +218,7 @@ void combine_thread_buffers(ThreadData* thread_data, int thread_count) {
     }
 }
 
-void update_framebuffer(char *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo) {
+static inline void update_framebuffer(char *fbp, struct fb_var_screeninfo *vinfo, struct fb_fix_screeninfo *finfo) {
     int width = vinfo->xres;
     int height = vinfo->yres;
     int bytes_per_pixel = vinfo->bits_per_pixel / 8;
@@ -247,7 +247,7 @@ void update_framebuffer(char *fbp, struct fb_var_screeninfo *vinfo, struct fb_fi
     }
 }
 
-int process_input(double *targetX, double *targetY, double *width, double *height, 
+static inline int process_input(double *targetX, double *targetY, double *width, double *height, 
                  int *recalculate_reference, int *auto_zoom, time_t *last_input_time) {
     static int key_state = KEY_STATE_NORMAL;
     char c;
