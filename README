@@ -1,2 +1,3 @@
-Mandelbrot rendered in framebuffer.
-Arbitrary version is very slow I wonder if a custom implementation would be faster?
+Various mathematical objects rendered on the frame buffer.
+
+Arbitrary version of Mandelbrot is very slow I wonder if a custom implementation would be faster?
