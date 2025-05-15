@@ -51,7 +51,7 @@ void visualize_bott_periodicity(double time) {
             double u = 2.0 * PI * i / GRID_SIZE;
             double v = 2.0 * PI * j / GRID_SIZE;
             
-            if (currentPeriod == 0) {  // Visualize π₁(U(1)) ≅ Z
+            if (currentPeriod == 0) {  // Visualize π_1(U(1)) ≅ Z
                 // In this case, we visualize loops in U(1) as circular paths
                 // U(1) can be visualized as a circle in 2D
                 double complex z1 = u1_element(u);
@@ -64,7 +64,7 @@ void visualize_bott_periodicity(double time) {
                 double windingNumber = u / (2.0 * PI);
                 color = hsv_to_rgb(fmod(windingNumber * 360.0, 360.0), 0.8, 0.9);
             } 
-            else {  // Visualize π₃(U(2)) ≅ Z
+            else {  // Visualize π_3(U(2)) ≅  Z
                 // We visualize loops in U(2)
                 complex_matrix2 mat = u2_element(u, v, angle);
                 
